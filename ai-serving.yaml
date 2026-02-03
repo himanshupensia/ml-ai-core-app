@@ -1,0 +1,8 @@
+apiVersion: ai.sap.com/v1alpha1
+kind: Serving
+metadata:
+  name: ml-inference
+spec:
+  image: himanshupensia/ml-inference:1.0
+  ports:
+    - port: 8080
