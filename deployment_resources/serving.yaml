@@ -11,9 +11,10 @@ metadata:
     scenarios.ai.sap.com/id: "my-ml-scenario"
     ai.sap.com/version: "1.0.0"
 spec:
-  # Using the pipe (|) tells AI Core to treat the following block as a raw string manifest
-  template: |
-    apiVersion: serving.kserve.io/v1beta1
+  inputs: {}
+  outputs: {}
+  template:
+    apiVersion: "serving.kserve.io/v1beta1"
     metadata:
       annotations:
         autoscaling.knative.dev/minScale: "1"
