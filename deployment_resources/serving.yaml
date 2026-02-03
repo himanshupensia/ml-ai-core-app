@@ -12,14 +12,14 @@ metadata:
     ai.sap.com/version: "1.0.0"
 spec:
   inputs: {}
-  template: |
+  template:
     apiVersion: serving.kserve.io/v1beta1
     metadata:
-      annotations:
+      annotations: |
         autoscaling.knative.dev/minScale: "1"
-      labels:
+      labels: |
         ai.sap.com/resourcePlan: "starter"
-    spec:
+    spec: |
       predictor:
         containers:
         - name: kserve-container
