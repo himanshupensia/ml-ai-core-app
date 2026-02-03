@@ -1,7 +1,7 @@
 apiVersion: ai.sap.com/v1alpha1
 kind: ServingTemplate
 metadata:
-  name: my-ml-serving-template
+  name: ml-inference-template
   annotations:
     scenarios.ai.sap.com/description: "Simple Iris Random Forest"
     scenarios.ai.sap.com/name: "my-ml-scenario"
@@ -11,10 +11,9 @@ metadata:
     scenarios.ai.sap.com/id: "my-ml-scenario"
     ai.sap.com/version: "1.0.0"
 spec:
-  inputs: {}
-  outputs: {}
-  template:
-    apiVersion: "serving.kserve.io/v1beta1"
+  inputs: []
+  template: 
+    apiVersion: serving.kserve.io/v1beta1
     metadata:
       annotations:
         autoscaling.knative.dev/minScale: "1"
@@ -24,7 +23,8 @@ spec:
       predictor:
         containers:
         - name: kserve-container
-          image: "docker.io/YOUR_DOCKER_USER/my-sap-ml-app:v1"
+          # REPLACE 'YOUR_DOCKER_USER' with your actual Docker Hub username
+          image: "docker.io/himanshupensia/ml-inference:v1" 
           ports:
           - containerPort: 9001
             protocol: "TCP"
