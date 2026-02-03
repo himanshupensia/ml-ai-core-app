@@ -11,8 +11,6 @@ metadata:
     scenarios.ai.sap.com/id: "my-ml-scenario"
     ai.sap.com/version: "1.0.0"
 spec:
-  inputs:
-    parameters: []
   template:
     apiVersion: "serving.kserve.io/v1beta1"
     metadata:
@@ -22,9 +20,13 @@ spec:
         ai.sap.com/resourcePlan: starter
     spec: |
       predictor:
+        imagePullSecrets:
+        - name: default
+        minReplicas: 1
+        maxReplicas: 1
         containers:
         - name: kserve-container
-          image: "docker.io/himanshupensia/ml-inference:v1"
+          image: docker.io/himanshupensia/ml-inference:v1
           ports:
           - containerPort: 9001
             protocol: TCP
