@@ -11,8 +11,8 @@ metadata:
     scenarios.ai.sap.com/id: "my-ml-scenario"
     ai.sap.com/version: "1.0.0"
 spec:
-  inputs: []
-  template: 
+  inputs: {}
+  template: |
     apiVersion: serving.kserve.io/v1beta1
     metadata:
       annotations:
@@ -23,8 +23,7 @@ spec:
       predictor:
         containers:
         - name: kserve-container
-          # REPLACE 'YOUR_DOCKER_USER' with your actual Docker Hub username
-          image: "docker.io/himanshupensia/ml-inference:v1" 
+          image: "docker.io/himanshupensia/ml-inference:v1"
           ports:
           - containerPort: 9001
             protocol: "TCP"
