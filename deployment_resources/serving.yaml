@@ -14,18 +14,12 @@ spec:
   template:
     apiVersion: "serving.kserve.io/v1beta1"
     metadata:
-      annotations: |
-        autoscaling.knative.dev/metric: concurrency
-        autoscaling.knative.dev/target: 1
-        autoscaling.knative.dev/targetBurstCapacity: 0
       labels: |
-        ai.sap.com/resourcePlan: starter
+        ai.sap.com/resourcePlan: infer.s
     spec: |
       predictor:
         imagePullSecrets:
-        - name: <YOUR_DOCKER_SECRET>
-        minReplicas: 1
-        maxReplicas: 1
+        - name: <YOUR_DOCKER_SECRET_NAME>
         containers:
         - name: kserve-container
           image: docker.io/himanshupensia/ml-inference:v1
