@@ -1,28 +1,29 @@
 apiVersion: ai.sap.com/v1alpha1
 kind: ServingTemplate
 metadata:
-  name: my-ml-serving-template # Name of the template in AI Launchpad
+  name: my-ml-serving-template
   annotations:
     scenarios.ai.sap.com/description: "Simple Iris Random Forest"
-    scenarios.ai.sap.com/name: "my-ml-scenario" # The Scenario Name
+    scenarios.ai.sap.com/name: "my-ml-scenario"
     executables.ai.sap.com/description: "Inference server for Iris model"
-    executables.ai.sap.com/name: "my-ml-executable" # The Executable Name
+    executables.ai.sap.com/name: "my-ml-executable"
   labels:
     scenarios.ai.sap.com/id: "my-ml-scenario"
     ai.sap.com/version: "1.0.0"
 spec:
-  template:
+  # Using the pipe (|) tells AI Core to treat the following block as a raw string manifest
+  template: |
     apiVersion: serving.kserve.io/v1beta1
     metadata:
       annotations:
-        autoscaling.knative.dev/minScale: "1" # Keep at least 1 replica running
+        autoscaling.knative.dev/minScale: "1"
       labels:
-        ai.sap.com/resourcePlan: "starter" # Match your specific plan if needed
+        ai.sap.com/resourcePlan: "starter"
     spec:
       predictor:
         containers:
         - name: kserve-container
-          image: docker.io/himanshupensia/ml-inference:v1 # <--- UPDATE THIS
+          image: "docker.io/YOUR_DOCKER_USER/my-sap-ml-app:v1"
           ports:
-          - containerPort: 9001 # Must match the port in server.py
-            protocol: TCP
+          - containerPort: 9001
+            protocol: "TCP"
