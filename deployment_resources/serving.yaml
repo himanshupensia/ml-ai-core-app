@@ -1,0 +1,28 @@
+apiVersion: ai.sap.com/v1alpha1
+kind: ServingTemplate
+metadata:
+  name: my-ml-serving-template # Name of the template in AI Launchpad
+  annotations:
+    scenarios.ai.sap.com/description: "Simple Iris Random Forest"
+    scenarios.ai.sap.com/name: "my-ml-scenario" # The Scenario Name
+    executables.ai.sap.com/description: "Inference server for Iris model"
+    executables.ai.sap.com/name: "my-ml-executable" # The Executable Name
+  labels:
+    scenarios.ai.sap.com/id: "my-ml-scenario"
+    ai.sap.com/version: "1.0.0"
+spec:
+  template:
+    apiVersion: serving.kserve.io/v1beta1
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "1" # Keep at least 1 replica running
+      labels:
+        ai.sap.com/resourcePlan: "starter" # Match your specific plan if needed
+    spec:
+      predictor:
+        containers:
+        - name: kserve-container
+          image: docker.io/himanshupensia/ml-inference:v1 # <--- UPDATE THIS
+          ports:
+          - containerPort: 9001 # Must match the port in server.py
+            protocol: TCP
