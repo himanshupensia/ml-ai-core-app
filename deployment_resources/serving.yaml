@@ -11,14 +11,15 @@ metadata:
     scenarios.ai.sap.com/id: "my-ml-scenario"
     ai.sap.com/version: "1.0.0"
 spec:
-  inputs: {}
+  inputs:
+    parameters: []
   template:
-    apiVersion: serving.kserve.io/v1beta1
+    apiVersion: "serving.kserve.io/v1beta1"
     metadata:
       annotations: |
         autoscaling.knative.dev/minScale: "1"
       labels: |
-        ai.sap.com/resourcePlan: "starter"
+        ai.sap.com/resourcePlan: starter
     spec: |
       predictor:
         containers:
@@ -26,4 +27,4 @@ spec:
           image: "docker.io/himanshupensia/ml-inference:v1"
           ports:
           - containerPort: 9001
-            protocol: "TCP"
+            protocol: TCP
