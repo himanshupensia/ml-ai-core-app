@@ -15,13 +15,15 @@ spec:
     apiVersion: "serving.kserve.io/v1beta1"
     metadata:
       annotations: |
-        autoscaling.knative.dev/minScale: "1"
+        autoscaling.knative.dev/metric: concurrency
+        autoscaling.knative.dev/target: 1
+        autoscaling.knative.dev/targetBurstCapacity: 0
       labels: |
         ai.sap.com/resourcePlan: starter
     spec: |
       predictor:
         imagePullSecrets:
-        - name: default
+        - name: <YOUR_DOCKER_SECRET>
         minReplicas: 1
         maxReplicas: 1
         containers:
